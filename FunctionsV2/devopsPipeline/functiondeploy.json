@@ -1,0 +1,554 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "nameOfService": {
+      "type": "string"
+    },
+    "environment": {
+      "type": "string",
+      "allowedValues": [
+        "dev",
+        "uat",
+        "prod-uks"
+      ]
+    },
+    "agressoWebServices": {
+      "type": "string"
+    },
+    "agressoCopServices": {
+      "type": "string"
+    },
+    "APPINSIGHTS_INSTRUMENTATIONKEY": {
+      "type": "string"
+    },
+    "APPLICATIONINSIGHTS_CONNECTION_STRING": {
+      "type": "string"
+    },
+    "AZURE_CLIENT_ID": {
+      "type": "string"
+    },
+    "AzureServicesAuthConnectionString": {
+      "type": "string"
+    },
+    "AzureWebJobsStorage": {
+      "type": "string"
+    },
+    "blobStorage": {
+      "type": "string"
+    },
+    "FUNCTIONS_EXTENSION_VERSION": {
+      "type": "string"
+    },
+    "AppServicePlanName": {
+      "type": "string"
+    },
+    "AppServicePlanResourceGroup": {
+      "type": "string"
+    },
+    "FUNCTIONS_WORKER_RUNTIME": {
+      "type": "string"
+    },
+    "kvEndpoint": {
+      "type": "string"
+    },
+    "opdgProxyHostname": {
+      "type": "string"
+    },
+    "OpenApi__AuthLevel__Document": {
+      "type": "string"
+    },
+    "OpenApi__HideSwaggerUI": {
+      "type": "bool"
+    },
+    "AppServicePlanRequired": {
+      "type": "bool"
+    },
+    "redisConnectionString": {
+      "type": "string"
+    },
+    "redisPrependString": {
+      "type": "string"
+    },
+    "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": {
+      "type": "string"
+    },
+    "WEBSITE_CONTENTSHARE": {
+      "type": "string"
+    },
+    "WEBSITE_RUN_FROM_PACKAGE": {
+      "type": "string"
+    },
+    "ManagedIdentity_Name": {
+      "defaultValue": "",
+      "type": "String"
+    },
+    "OrgDataCS": {
+      "type": "string"
+    },
+    "sapTokenUrl": {
+      "type": "string"
+    },
+    "esmTokenUrl": {
+      "type": "string"
+    },
+    "campusJobsTokenUrl": {
+      "type": "string"
+    },
+    "storageAccountConnectionString": {
+      "type": "string"
+    },
+    "orgDataTableName": {
+      "type": "string"
+    },
+    "orgLevel2Roles": {
+      "type": "string"
+    },
+    "orgLevel3Roles": {
+      "type": "string"
+    },
+    "vcJobTitle": {
+      "type": "string"
+    },
+    "schemaBlobContainer": {
+      "type": "string"
+    },
+    "sapCampusJobsUrl": {
+      "type": "string"
+    },
+    "lbgCoPUri": {
+      "type": "string"
+    },
+    "lbgTlsCertName": {
+      "type": "string"
+    },
+    "lbgMlsCertName": {
+      "type": "string"
+    },
+    "symlibRootURL": {
+      "type": "string"
+    },
+    "eventGridURL": {
+      "type": "string"
+    },
+    "eventGridAccessKey": {
+      "type": "string"
+    },
+    "trentApiLogTable": {
+      "type": "string"
+    },
+    "trentApiLogPartition": {
+      "type": "string"
+    },
+    "trentApiEventSubject": {
+      "type": "string"
+    },
+    "trentApiBlobContainer": {
+      "type": "string"
+    },
+    "SqlConnectionString": {
+      "type": "string"
+    },
+    "HistoricStudentPhotosBatchSize": {
+      "type": "int"
+    },
+    "EnableHistoricResize": {
+      "type": "string"
+    },
+    "HistoricStudentPhotosSchedule": {
+      "type": "string"
+    },
+    "StudentApp__StoredProcedureName": {
+      "type": "string"
+    },
+    "StudentApp__UseManagedIdentity": {
+      "type": "string"
+    },
+    "StudentApp__ManagedIdentityClientId": {
+      "type": "string"
+    },
+    "StudentApp__SqlCommandTimeoutSeconds": {
+      "type": "string"
+    },
+    "StudentApp__SqlMaxRetryCount": {
+      "type": "string"
+    },
+    "StudentApp__SqlRetryBaseDelayMilliseconds": {
+      "type": "string"
+    },
+    "StudentApp__Return404WhenStudentNotFound": {
+      "type": "string"
+    },
+    "StudentApp__DefaultPhotoMimeType": {
+      "type": "string"
+    },
+    "SymPayDatasource": {
+      "type": "string"
+    },
+    "SymPayDatabase": {
+      "type": "string"
+    },
+    "SymPayConnectorID": {
+      "type": "int"
+    },
+    "SymPaySchemeID": {
+      "type": "string"
+    },
+    "SymPayRulesHost": {
+      "type": "string"
+    },
+    "SymPayCashlessHost": {
+      "type": "string"
+    },
+    "SymPayUsername": {
+      "type": "string"
+    },
+    "SymPayPassword": {
+      "type": "string"
+    },
+    "SymPaySharedSecret": {
+      "type": "string"
+    },
+    "SB1ConnectionString": {
+      "type": "string"
+    }
+  },
+  "variables": {
+    "funcName": "[parameters('nameOfService')]",
+    "storageAcctName": "ukscommond001st",
+    "serverFarmId": "[resourceId(parameters('AppServicePlanResourceGroup'), 'Microsoft.Web/serverfarms', parameters('AppServicePlanName'))]"
+  },
+  "resources": [
+    {
+      "apiVersion": "2018-02-01",
+      "name": "[variables('funcName')]",
+      "type": "Microsoft.Web/sites",
+      "kind": "functionapp",
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "[resourceID('Microsoft.ManagedIdentity/userAssignedIdentities/',parameters('ManagedIdentity_Name'))]": {
+          }
+        }
+      },
+      "properties": {
+        "name": "[variables('funcName')]",
+        "serverFarmId": "[variables('serverFarmId')]",
+        "siteConfig": {
+          "alwaysOn": "[if(contains(parameters('environment'),'prod'), bool('true'), bool('false'))]",
+          "appSettings": [
+            {
+              "name": "agressoWebServices",
+              "value": "[parameters('agressoWebServices')]"
+            },
+            {
+              "name": "agressoCopServices",
+              "value": "[parameters('agressoCopServices')]"
+            },
+            {
+              "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+              "value": "[parameters('APPINSIGHTS_INSTRUMENTATIONKEY')]"
+            },
+            {
+              "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
+              "value": "[parameters('APPLICATIONINSIGHTS_CONNECTION_STRING')]"
+            },
+            {
+              "name": "AZURE_CLIENT_ID",
+              "value": "[parameters('AZURE_CLIENT_ID')]"
+            },
+            {
+              "name": "AzureServicesAuthConnectionString",
+              "value": "[parameters('AzureServicesAuthConnectionString')]"
+            },
+            {
+              "name": "AzureWebJobsStorage",
+              "value": "[parameters('AzureWebJobsStorage')]"
+            },
+            {
+              "name": "blobStorage",
+              "value": "[parameters('blobStorage')]"
+            },
+            {
+              "name": "FUNCTIONS_EXTENSION_VERSION",
+              "value": "[parameters('FUNCTIONS_EXTENSION_VERSION')]"
+            },
+            {
+              "name": "FUNCTIONS_WORKER_RUNTIME",
+              "value": "[parameters('FUNCTIONS_WORKER_RUNTIME')]"
+            },
+            {
+              "name": "kvEndpoint",
+              "value": "[parameters('kvEndpoint')]"
+            },
+            {
+              "name": "environment",
+              "value": "[parameters('environment')]"
+            },
+            {
+              "name": "opdgProxyHostname",
+              "value": "[parameters('opdgProxyHostname')]"
+            },
+            {
+              "name": "OpenApi__AuthLevel__Document",
+              "value": "[parameters('OpenApi__AuthLevel__Document')]"
+            },
+            {
+              "name": "OpenApi__HideSwaggerUI",
+              "value": "[parameters('OpenApi__HideSwaggerUI')]"
+            },
+            {
+              "name": "redisConnectionString",
+              "value": "[parameters('redisConnectionString')]"
+            },
+            {
+              "name": "redisPrependString",
+              "value": "[parameters('redisPrependString')]"
+            },
+            {
+              "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+              "value": "[parameters('WEBSITE_CONTENTAZUREFILECONNECTIONSTRING')]"
+            },
+            {
+              "name": "WEBSITE_CONTENTSHARE",
+              "value": "[parameters('WEBSITE_CONTENTSHARE')]"
+            },
+            {
+              "name": "WEBSITE_RUN_FROM_PACKAGE",
+              "value": "[parameters('WEBSITE_RUN_FROM_PACKAGE')]"
+            },
+            {
+              "name": "FUNCTIONS_INPROC_NET8_ENABLED",
+              "value": "1"
+            },
+            {
+              "name": "sapTokenUrl",
+              "value": "[parameters('sapTokenUrl')]"
+            },
+            {
+              "name": "esmTokenUrl",
+              "value": "[parameters('esmTokenUrl')]"
+            },
+            {
+              "name": "campusJobsTokenUrl",
+              "value": "[parameters('campusJobsTokenUrl')]"
+            },
+            {
+              "name": "storageAccountConnectionString",
+              "value": "[parameters('storageAccountConnectionString')]"
+            },
+            {
+              "name": "orgDataTableName",
+              "value": "[parameters('orgDataTableName')]"
+            },
+            {
+              "name": "orgLevel2Roles",
+              "value": "[parameters('orgLevel2Roles')]"
+            },
+            {
+              "name": "orgLevel3Roles",
+              "value": "[parameters('orgLevel3Roles')]"
+            },
+            {
+              "name": "vcJobTitle",
+              "value": "[parameters('vcJobTitle')]"
+            },
+            {
+              "name": "schemaBlobContainer",
+              "value": "[parameters('schemaBlobContainer')]"
+            },
+            {
+              "name": "sapCampusJobsUrl",
+              "value": "[parameters('sapCampusJobsUrl')]"
+            },
+            {
+              "name": "lbgCoPUri",
+              "value": "[parameters('lbgCoPUri')]"
+            },
+            {
+              "name": "lbgTlsCertName",
+              "value": "[parameters('lbgTlsCertName')]"
+            },
+            {
+              "name": "lbgMlsCertName",
+              "value": "[parameters('lbgMlsCertName')]"
+            },
+            {
+              "name": "symlibRootURL",
+              "value": "[parameters('symlibRootURL')]"
+            },
+            {
+              "name": "eventGridURL",
+              "value": "[parameters('eventGridURL')]"
+            },
+            {
+              "name": "eventGridAccessKey",
+              "value": "[parameters('eventGridAccessKey')]"
+            },
+            {
+              "name": "trentApiLogTable",
+              "value": "[parameters('trentApiLogTable')]"
+            },
+            {
+              "name": "trentApiLogPartition",
+              "value": "[parameters('trentApiLogPartition')]"
+            },
+            {
+              "name": "trentApiEventSubject",
+              "value": "[parameters('trentApiEventSubject')]"
+            },
+            {
+              "name": "trentApiBlobContainer",
+              "value": "[parameters('trentApiBlobContainer')]"
+            },
+            {
+              "name": "SqlConnectionString",
+              "value": "[parameters('SqlConnectionString')]"
+            },
+            {
+              "name": "HistoricStudentPhotosBatchSize",
+              "value": "[parameters('HistoricStudentPhotosBatchSize')]"
+            },
+            {
+              "name": "EnableHistoricResize",
+              "value": "[parameters('EnableHistoricResize')]"
+            },
+            {
+              "name": "HistoricStudentPhotosSchedule",
+              "value": "[parameters('HistoricStudentPhotosSchedule')]"
+            },
+            {
+              "name": "StudentApp__StoredProcedureName",
+              "value": "[parameters('StudentApp__StoredProcedureName')]"
+            },
+            {
+              "name": "StudentApp__UseManagedIdentity",
+              "value": "[parameters('StudentApp__UseManagedIdentity')]"
+            },
+            {
+              "name": "StudentApp__ManagedIdentityClientId",
+              "value": "[parameters('StudentApp__ManagedIdentityClientId')]"
+            },
+            {
+              "name": "StudentApp__SqlCommandTimeoutSeconds",
+              "value": "[parameters('StudentApp__SqlCommandTimeoutSeconds')]"
+            },
+            {
+              "name": "StudentApp__SqlMaxRetryCount",
+              "value": "[parameters('StudentApp__SqlMaxRetryCount')]"
+            },
+            {
+              "name": "StudentApp__SqlRetryBaseDelayMilliseconds",
+              "value": "[parameters('StudentApp__SqlRetryBaseDelayMilliseconds')]"
+            },
+            {
+              "name": "StudentApp__Return404WhenStudentNotFound",
+              "value": "[parameters('StudentApp__Return404WhenStudentNotFound')]"
+            },
+            {
+              "name": "StudentApp__DefaultPhotoMimeType",
+              "value": "[parameters('StudentApp__DefaultPhotoMimeType')]"
+            },
+            {
+              "name": "SymPayDatasource",
+              "value": "[parameters('SymPayDatasource')]"
+            },
+            {
+              "name": "SymPayDatabase",
+              "value": "[parameters('SymPayDatabase')]"
+            },
+            {
+              "name": "SymPayConnectorID",
+              "value": "[parameters('SymPayConnectorID')]"
+            },
+            {
+              "name": "SymPaySchemeID",
+              "value": "[parameters('SymPaySchemeID')]"
+            },
+            {
+              "name": "SymPayRulesHost",
+              "value": "[parameters('SymPayRulesHost')]"
+            },
+            {
+              "name": "SymPayCashlessHost",
+              "value": "[parameters('SymPayCashlessHost')]"
+            },
+            {
+              "name": "SymPayUsername",
+              "value": "[parameters('SymPayUsername')]"
+            },
+            {
+              "name": "SymPayPassword",
+              "value": "[concat('@Microsoft.KeyVault(SecretUri=', parameters('SymPayPassword'), ')')]"
+            },
+            {
+              "name": "SymPaySharedSecret",
+              "value": "[concat('@Microsoft.KeyVault(SecretUri=', parameters('SymPaySharedSecret'), ')')]"
+            },
+            {
+              "name": "SB1ConnectionString",
+              "value": "[parameters('SB1ConnectionString')]"
+            }
+          ]
+        },
+        "keyVaultReferenceIdentity": "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', parameters('ManagedIdentity_Name'))]",
+        "clientAffinityEnabled": false,
+        "reserved": false
+      },
+      "resources": [
+        {
+          "name": "slotConfigNames",
+          "type": "config",
+          "apiVersion": "2015-08-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/Sites', variables('funcName'))]"
+          ],
+          "tags": {
+            "displayName": "slotConfigNames"
+          },
+          "properties": {
+            "appSettingNames": [
+              "AppInsightsKey",
+              "kvEndpoint",
+              "redisPrependString",
+              "OpenApi__HideSwaggerUI",
+              "OpenApi__AuthLevel__Document",
+              "opdgProxyHostname",
+              "blobStorage",
+              "AzureWebJobsStorage",
+              "AzureServicesAuthConnectionString",
+              "agressoWebServices",
+              "SqlConnectionString",
+              "HistoricStudentPhotosBatchSize",
+              "EnableHistoricResize",
+              "HistoricStudentPhotosSchedule",
+              "StudentApp__StoredProcedureName",
+              "StudentApp__UseManagedIdentity",
+              "StudentApp__ManagedIdentityClientId",
+              "StudentApp__SqlCommandTimeoutSeconds",
+              "StudentApp__SqlMaxRetryCount",
+              "StudentApp__SqlRetryBaseDelayMilliseconds",
+              "StudentApp__Return404WhenStudentNotFound",
+              "StudentApp__DefaultPhotoMimeType",
+              "SymPayDatasource",
+              "SymPayDatabase",
+              "SymPayConnectorID",
+              "SymPaySchemeID",
+              "SymPayRulesHost",
+              "SymPayCashlessHost",
+              "SymPayUsername",
+              "SymPayPassword",
+              "SymPaySharedSecret",
+              "SB1ConnectionString"
+            ]
+          }
+        }
+      ],
+      "dependsOn": [
+      ],
+      "location": "[resourceGroup().location]"
+    }
+  ],
+  "outputs": {
+  }
+}

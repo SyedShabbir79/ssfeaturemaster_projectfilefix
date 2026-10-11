@@ -1,0 +1,210 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "nameOfService": {
+      "value": "uks-common-p-001-func"
+    },
+    "environment": {
+      "value": "prod-uks"
+    },
+    "agressoWebServices": {
+      "value": "https://agresso-websvc.reading.ac.uk/BusinessWorld-webservices/service.svc"
+    },
+    "APPINSIGHTS_INSTRUMENTATIONKEY": {
+      "value": "2311163b-16e5-40be-97fd-69f082d52ffe"
+    },
+    "APPLICATIONINSIGHTS_CONNECTION_STRING": {
+      "value": "InstrumentationKey=2311163b-16e5-40be-97fd-69f082d52ffe;IngestionEndpoint=https://uksouth-1.in.applicationinsights.azure.com/"
+    },
+    "AZURE_CLIENT_ID": {
+      "value": "897ec3fb-f6e9-4111-b4e6-e6131e9d240d"
+    },
+    "AzureServicesAuthConnectionString": {
+      "value": "RunAs=App;AppId=897ec3fb-f6e9-4111-b4e6-e6131e9d240d"
+    },
+    "AzureWebJobsStorage": {
+      "value": "DefaultEndpointsProtocol=https;AccountName=ukscommonp001st;AccountKey=yM2y3XcmA/9Ty2uWGZWCHOTh5XSD0tWpoRCMPmNmKphP7lTvwhGxIstDjk3tfzU6WW2OcGR1e5jimPml3LA2PA==;EndpointSuffix=core.windows.net"
+    },
+    "blobStorage": {
+      "value": "DefaultEndpointsProtocol=https;AccountName=ukscommonp001st;AccountKey=yM2y3XcmA/9Ty2uWGZWCHOTh5XSD0tWpoRCMPmNmKphP7lTvwhGxIstDjk3tfzU6WW2OcGR1e5jimPml3LA2PA==;EndpointSuffix=core.windows.net"
+    },
+    "FUNCTIONS_EXTENSION_VERSION": {
+      "value": "~4"
+    },
+    "AppServicePlanName": {
+      "value": "uks-common-func-p-001-plan"
+    },
+    "AppServicePlanResourceGroup": {
+      "value": "UoR-uks-ais-p-rg"
+    },
+    "FUNCTIONS_WORKER_RUNTIME": {
+      "value": "dotnet"
+    },
+    "kvEndpoint": {
+      "value": "https://uks-common-p-001-kv.vault.azure.net"
+    },
+    "opdgProxyHostname": {
+      "value": "localhost-prod"
+    },
+    "OpenApi__AuthLevel__Document": {
+      "value": "Function"
+    },
+    "OpenApi__HideSwaggerUI": {
+      "value": true
+    },
+    "AppServicePlanRequired": {
+      "value": true
+    },
+    "redisConnectionString": {
+      "value": "uks-common-p-001-cache.redis.cache.windows.net:6380,password=FIEDbZkeohOHxff9DtpaU6S5NUkLXTzLIloSEZ9XRDY=,ssl=True,abortConnect=False"
+    },
+    "redisPrependString": {
+      "value": "AIS-Prod"
+    },
+    "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": {
+      "value": "DefaultEndpointsProtocol=https;AccountName=ukscommonp001st;AccountKey=yM2y3XcmA/9Ty2uWGZWCHOTh5XSD0tWpoRCMPmNmKphP7lTvwhGxIstDjk3tfzU6WW2OcGR1e5jimPml3LA2PA==;EndpointSuffix=core.windows.net"
+    },
+    "WEBSITE_CONTENTSHARE": {
+      "value": "uks-common-p-001-func8cf1"
+    },
+    "WEBSITE_RUN_FROM_PACKAGE": {
+      "value": "1"
+    },
+    "ManagedIdentity_Name": {
+      "value": "uks-common-p-001-id"
+    },
+    "sapTokenUrl": {
+      "value": ""
+    },
+    "esmTokenUrl": {
+      "value": "https://uor.service-now.com/oauth_token.do"
+    },
+    "campusJobsTokenUrl": {
+      "value": ""
+    },
+    "storageAccountConnectionString": {
+      "value": "DefaultEndpointsProtocol=https;AccountName=ukscommonp001st;AccountKey=yM2y3XcmA/9Ty2uWGZWCHOTh5XSD0tWpoRCMPmNmKphP7lTvwhGxIstDjk3tfzU6WW2OcGR1e5jimPml3LA2PA==;EndpointSuffix=core.windows.net"
+    },
+    "orgDataTableName": {
+      "value": "uksaisorgdata"
+    },
+    "orgLevel2Roles": {
+      "value": "{\"UoRStandard\":{\"Id\":\"50000001\",\"Name\":\"University of Reading\"},\"UoRInternational\":{\"Id\":\"50000001\",\"Name\":\"UoR International\"},\"UoRAssociated\":{\"Id\":\"50000001\",\"Name\":\"UoR Associated\"},\"SUMS\":{\"Id\":\"50000001\",\"Name\":\"SUMS Consulting\"}}"
+    },
+    "orgLevel3Roles": {
+      "value": "{\"vcFaculty\":\"Vice Chancellor's Office\",\"govFaculty\":\"Governors\",\"sumsFaculty\":\"SUMS\"}"
+    },
+    "vcJobTitle": {
+      "value": "Vice Chancellor"
+    },
+    "sapCampusJobsUrl": {
+      "value": ""
+    },
+    "OrgDataCS": {
+      "value": "DefaultEndpointsProtocol=https;AccountName=ukscommonp001st;AccountKey=yM2y3XcmA/9Ty2uWGZWCHOTh5XSD0tWpoRCMPmNmKphP7lTvwhGxIstDjk3tfzU6WW2OcGR1e5jimPml3LA2PA==;EndpointSuffix=core.windows.net"
+    },
+    "schemaBlobContainer": {
+      "value": "entities"
+    },
+    "lbgCoPUri": {
+      "value": "https://secure.api.commercial.lloydsbanking.com/o/commercial-direct-channel/confirmation-of-payee/v1/payees/validation"
+    },
+    "agressoCopServices": {
+      "value": "https://agresso-websvc.reading.ac.uk/BusinessWorld-web-api/v1/suppliers"
+    },
+    "lbgTlsCertName": {
+      "value": "lbg-cop-TLS-2026"
+    },
+    "lbgMlsCertName": {
+      "value": "lbg-cop-MLS-2026"
+    },
+    "symlibRootURL": {
+      "value": "https://sdws02.sirsidynix.net.uk/rdg_ilsws"
+    },
+    "eventGridURL": {
+      "value": "https://uks-common-p-001-egd.uksouth-1.eventgrid.azure.net/api/events"
+    },
+    "eventGridAccessKey": {
+      "value": "1WYhX7Jkvnk4IPqPpMFgP9o1QuReldE9aM0fLfRcNdQipeK9zUAjJQQJ99BAACmepeSXJ3w3AAABAZEGCEIE"
+    },
+    "trentApiLogTable": {
+      "value": "TrentApiResponses"
+    },
+    "trentApiLogPartition": {
+      "value": "DataConvResponse"
+    },
+    "trentApiEventSubject": {
+      "value": "Trent Data Conversion Error"
+    },
+    "trentApiBlobContainer": {
+      "value": "sys-staff-trentresponses"
+    },
+    "SqlConnectionString": {
+      "value": "Server=tcp:uks-common-p-001-sql.database.windows.net,1433;Initial Catalog=uks-uorcache-p-001-sqldb;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=Active Directory Managed Identity;User Id =897ec3fb-f6e9-4111-b4e6-e6131e9d240d;"
+    },
+    "HistoricStudentPhotosBatchSize": {
+      "value": 200
+    },
+    "EnableHistoricResize": {
+      "value": "true"
+    },
+    "HistoricStudentPhotosSchedule": {
+      "value": "0 */30 * * * *"
+    },
+    "StudentApp__StoredProcedureName": {
+      "value": "[dbo].[UoR_AIS_StudentApp]"
+    },
+    "StudentApp__UseManagedIdentity": {
+      "value": "false"
+    },
+    "StudentApp__ManagedIdentityClientId": {
+      "value": "897ec3fb-f6e9-4111-b4e6-e6131e9d240d"
+    },
+    "StudentApp__SqlCommandTimeoutSeconds": {
+      "value": "30"
+    },
+    "StudentApp__SqlMaxRetryCount": {
+      "value": "3"
+    },
+    "StudentApp__SqlRetryBaseDelayMilliseconds": {
+      "value": "250"
+    },
+    "StudentApp__Return404WhenStudentNotFound": {
+      "value": "false"
+    },
+    "StudentApp__DefaultPhotoMimeType": {
+      "value": "image/jpeg"
+    },
+    "SymPayDatasource": {
+      "value": "bqH5+rQcWC5hdNcM6d1ZhA/I0j0oxfI1ERhK3Z+CfBJGKeDseUKTwQ=="
+    },
+    "SymPayDatabase": {
+      "value": "unFylT1aIcKm6chCZePtc+bBDi2NuWdA"
+    },
+    "SymPayConnectorID": {
+      "value": 10073
+    },
+    "SymPaySchemeID": {
+      "value": "16711747"
+    },
+    "SymPayRulesHost": {
+      "value": "https://lima-00080.mcr-symphony.net/SymphonyRules/SymphonyRules.asmx"
+    },
+    "SymPayCashlessHost": {
+      "value": "https://lima-00080.mcr-symphony.net/ImportService/ImportService.asmx"
+    },
+    "SymPayUsername": {
+      "value": "MCR-HOST\\UORWEBSERVICE"
+    },
+    "SymPayPassword": {
+      "value": "https://uks-common-p-001-kv.vault.azure.net/secrets/UoR-Sys-SymPay-Password/718bc7a8d97e4db0aa67d93df851f5ee"
+    },
+    "SymPaySharedSecret": {
+      "value": "https://uks-common-p-001-kv.vault.azure.net/secrets/UoR-Sys-SymPay-SharedSecret/2e2cfc2d20cd46c08f12fed28efa5d8b"
+    },
+    "SB1ConnectionString": {
+      "value": "Endpoint=sb://uks-common-p-001-sbus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=iK0jTz0H3xfzYjduibWuQUc3BQd97+QBq4ZZlx3g7E8="
+    }
+  }
+}

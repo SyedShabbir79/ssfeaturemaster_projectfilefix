@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "FunctionsV2": {
+      "commandName": "Project",
+      "commandLineArgs": "--verbose"
+    },
+    "Common_SFTP2": {
+      "commandName": "Project",
+      "commandLineArgs": "--verbose --csharp --functions Common_SFTP2_Read Common_SFTP2_Write Common_SFTP2_Exists Common_SFTP2_List Common_SFTP2_Delete"
+    }
+  }
+}

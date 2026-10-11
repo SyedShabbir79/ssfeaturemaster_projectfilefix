@@ -1,0 +1,87 @@
+ 
+trigger:
+  branches:
+    include:
+    - master
+    - dev
+    - feature*
+
+  paths:
+    include:
+      - Dont-Trigger-Pipelines/
+pr:
+  branches:
+    include:
+      - "*"
+
+
+resources:
+  repositories:
+    - repository: pckgtemplates
+      type: git
+      name: AIS/AIS-PipelineTemplates
+      #ref: refs/heads/feature/int-181      
+
+stages:
+- stage: Deploy_Dev
+  displayName: Build Deploy Dev Stage
+  #condition: and(succeeded(),or(contains(variables['Build.SourceBranch'],'master'),contains(variables['Build.SourceBranch'],'release'),contains(variables['Build.SourceBranch'],'fix')))  
+  jobs:    
+  - template: templates/azure-pipeline-build-deploy-functionApp-template.yml@pckgtemplates
+    parameters:
+        environment: 'Dev'
+        vmImage: 'windows-latest' 
+        azureSubscriptionName: 'UoR-Standard'
+        resourceGroupName: 'UoR-uks-ais-d-rg'
+        armFileName: 'functiondeploy'
+        devopsPipelinePath: 'devopsPipeline'
+        azureResourceManagerConnection: 'AIS-DevOps'  
+        subscriptionId: '7c3ee09f-3680-4268-9623-3efc950271e6'
+        location: 'UK South'
+        functionProjName: 'FunctionsV2'
+        functionAppName: 'uks-common-d-001-func'        
+
+- stage: Deploy_uat
+  displayName: Build Deploy Uat Stage
+  #condition: and(succeeded(),or(contains(variables['Build.SourceBranch'],'master'),contains(variables['Build.SourceBranch'],'release'),contains(variables['Build.SourceBranch'],'fix')))
+  dependsOn: [Deploy_Dev]
+  jobs:    
+  - template: templates/azure-pipeline-build-deploy-functionApp-template.yml@pckgtemplates
+    parameters:
+        environment: 'Uat'
+        vmImage: 'windows-latest' 
+        azureSubscriptionName: 'UoR-Standard'
+        resourceGroupName: 'UoR-uks-ais-u-rg'
+        armFileName: 'functiondeploy'
+        devopsPipelinePath: 'devopsPipeline'
+        azureResourceManagerConnection: 'AIS-DevOps'  
+        subscriptionId: '7c3ee09f-3680-4268-9623-3efc950271e6'
+        location: 'UK South'
+        functionProjName: 'FunctionsV2'
+        functionAppName: 'uks-common-u-001-func' 
+
+- stage: Deploy_prod_uks
+  displayName: Build Deploy Prod Uks Stage
+  #condition: and(succeeded(),or(contains(variables['Build.SourceBranch'],'master'),contains(variables['Build.SourceBranch'],'release'),contains(variables['Build.SourceBranch'],'fix')))
+  dependsOn: [Deploy_uat]
+  jobs:    
+  - template: templates/azure-pipeline-build-deploy-functionApp-template.yml@pckgtemplates
+    parameters:
+        environment: 'prod-uks'
+        vmImage: 'windows-latest' 
+        azureSubscriptionName: 'UoR-Standard'
+        resourceGroupName: 'UoR-uks-ais-p-rg'
+        armFileName: 'functiondeploy'
+        devopsPipelinePath: 'devopsPipeline'
+        azureResourceManagerConnection: 'AIS-DevOps'  
+        subscriptionId: '7c3ee09f-3680-4268-9623-3efc950271e6'
+        location: 'UK South'
+        functionProjName: 'FunctionsV2'
+        functionAppName: 'uks-common-p-001-func' 
+                  
+                    
+                   
+
+                
+
+

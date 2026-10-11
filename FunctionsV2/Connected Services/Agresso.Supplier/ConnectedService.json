@@ -1,0 +1,15 @@
+{
+  "providerId": "Microsoft.Tools.ServiceModel.Svcutil",
+  "version": "2.0.2",
+  "options": {
+    "inputs": [
+      "http://fin-d-aw01.private.rdg.ac.uk/businessworld-webservices/service.svc?SupplierService/Supplier"
+    ],
+    "namespaceMappings": [
+      "*, Agresso.Supplier"
+    ],
+    "outputFile": "Reference.cs",
+    "targetFramework": "net6.0",
+    "typeReuseMode": "All"
+  }
+}
